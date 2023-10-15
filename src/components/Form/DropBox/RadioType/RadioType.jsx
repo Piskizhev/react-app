@@ -4,7 +4,9 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ClearIcon from "@mui/icons-material/Clear";
+import { Typography } from "@mui/material";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
 function RadioType() {
   const [radioOptions, setRadioOptions] = useState(["Radio Option 1"]);
@@ -31,33 +33,37 @@ function RadioType() {
 
   return (
     <div>
-      <RadioGroup>
+      <RadioGroup className='py-4 w-max	'>
         {radioOptions.map((option, index) => (
           <div key={index} className='flex space-between'>
-            <FormControlLabel
+            {/* <FormControlLabel
               value={option}
               control={<Radio />}
-              label={option}
-            />
+              // label={option}
+              className='w-full'
+            > */}
+            <RadioButtonUncheckedIcon className='text-red-600' />
+            <Typography>{option}</Typography>
+            {/* </FormControlLabel> */}
             {radioOptions.length > 1 && (
               <IconButton
                 onClick={() => handleDeleteOption(index)}
                 color='secondary'
                 size='small'
               >
-                <DeleteIcon />
+                <ClearIcon />
               </IconButton>
             )}
           </div>
         ))}
 
-        {/* Display the "Add New Option" field like a disabled radio option */}
+        {/* Display the "Add New Option" */}
         <FormControlLabel
           value='add-new-option'
           control={<Radio disabled />}
           label={
             <TextField
-              label='Add New Option'
+              placeholder='Add New Option'
               value={textValue}
               onChange={handleTextChange}
               onBlur={handleBlur}

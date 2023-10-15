@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import deleteIcon from "../../img/bin.svg";
 import {
   Tooltip,
   IconButton,
@@ -7,13 +8,15 @@ import {
   Popover,
   Button,
   Divider,
+  Typography,
 } from "@mui/material";
-import PropTypes from "prop-types";
+import TextField from "@mui/material/TextField";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 import DropBox from "./DropBox/DropBox";
 import { FormControl, useFormControlContext } from "@mui/base/FormControl";
+import PropTypes from "prop-types";
 import clsx from "clsx";
-import TextField from "@mui/material/TextField";
 import "./Form.css";
 
 function Form() {
@@ -127,14 +130,18 @@ function Form() {
     <div className='px-4'>
       {questions.map((question, index) => (
         <div key={question.id}>
-          <Box className='flex justify-between pt-[32px]'>
-            <Tooltip title='Add' placement='left-start'>
-              #{index + 1}Question
+          <Box className='flex justify-between align-middle	 pt-6'>
+            <Tooltip
+              title='Add'
+              placement='left-start'
+              className='flex align-middle text-ryzhGray'
+            >
+              #{index + 1} Question
             </Tooltip>
             <div>
               <Tooltip title='Delete' placement='right-start'>
-                <IconButton className='h-5 w-5' onClick={handleDeleteClick}>
-                  <DeleteIcon />
+                <IconButton onClick={handleDeleteClick}>
+                  <img src={deleteIcon} alt='delete' />
                 </IconButton>
               </Tooltip>
               <Popover
@@ -161,7 +168,9 @@ function Form() {
             </div>
           </Box>
           <FormControl required className='pt-6'>
-            <Label>Question title</Label>
+            <Label className='text-ryzhBlack custom-QuestionTitle'>
+              Question title
+            </Label>
             <TextField
               id='outlined-multiline-flexible'
               multiline
@@ -171,14 +180,24 @@ function Form() {
             <HelperText />
           </FormControl>
           <DropBox />
+          {questions.length !== 0 && <Divider />}
         </div>
       ))}
 
-      <Box className='flex justify-between pt-[32px]'>
-        <Tooltip title='Add new question' placement='left-start'>
-          <span className='cursor-pointer' onClick={handleAddQuestion}>
-            + Add new question
-          </span>
+      <Box
+        className='flex justify-between pt-4 px-4 pb-[88px] '
+        onClick={handleAddQuestion}
+      >
+        <Tooltip
+          title='Add new question'
+          placement='left-start'
+          className='flex gap-3'
+        >
+          <AddIcon sx={{ fontSize: 20 }} className='text-ryzhBlue ' />
+
+          <Typography className='text-ryzhBlue custom-AddNewStyle'>
+            Add new question
+          </Typography>
         </Tooltip>
       </Box>
     </div>

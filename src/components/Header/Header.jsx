@@ -10,7 +10,7 @@ function Header() {
 
   return (
     <div className='px-4 pt-5'>
-      <img src={logo} alt='logo' />
+      <img src={logo} alt='logo' className='h-12' />
       <TextareaAutosize
         className='w-full min-h-8 pt-8 focus:shadow-lg bg-white focus-visible:outline-0 custom-placeholder'
         placeholder='Questionairie Title'
