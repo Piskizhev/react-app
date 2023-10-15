@@ -1,19 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
-.custom-placeholder,
-textarea::placeholder {
-    color: ryzhBlack;
-    font-size: 24px;
-    font-family: Inter;
-    font-weight: 600;
-    word-wrap: break-word /* Replace 'your-font-family-here' with your desired font family, e.g., 'Arial, sans-serif' */
-  }
-
-.custom-placeholder{
-    resize: none;
-}
-
-
 .custom-AddNewStyle {
     font-size: 14px;
     font-family: Inter; 

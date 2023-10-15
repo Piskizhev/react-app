@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import "./Header.css";
 import logo from "../../img/bear.png";
-import TextField from "@mui/material/TextField";
 import { Divider } from "@mui/material";
 
 function Header() {
-  const [value, setValue] = useState("");
-
   return (
-    <div className='px-4 pt-5'>
+    <div className='px-4 pt-5 custom-form-title'>
       <img src={logo} alt='logo' className='h-12' />
-      <TextareaAutosize
-        className='w-full min-h-8 pt-8 focus:shadow-lg bg-white focus-visible:outline-0 custom-placeholder'
-        placeholder='Questionairie Title'
-      />
+      <div className='pt-8 '>
+        <TextareaAutosize
+          className='w-full focus-visible:outline-0 custom-placeholder text-ryzhBlack'
+          placeholder='Questionairie Title'
+        />
+      </div>
       <Divider />
     </div>
   );

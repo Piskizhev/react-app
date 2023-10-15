@@ -23,16 +23,6 @@ function Form() {
   const [questions, setQuestions] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const [titleValue, setTitleValue] = useState("");
-  const [a_preview, setA_preview] = useState("");
-
-  // useEffect(() => {
-  //   let body = {
-  //     titleValie: titleValue,
-  //   };
-  //   return body;
-  // }, [titleValue]);
-
   const handleAddQuestion = () => {
     setQuestions((prevQuestions) => [
       ...prevQuestions,
@@ -181,7 +171,7 @@ function Form() {
             <HelperText />
           </FormControl>
           <DropBox />
-          {questions.length !== 0 && <Divider />}
+          {questions.length !== 0 && <Divider className='pt-8' />}
         </div>
       ))}
 

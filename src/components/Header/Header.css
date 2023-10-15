@@ -1,13 +1,12 @@
-.custom-placeholder,
-textarea::placeholder {
+.custom-placeholder{
+  resize: none;
+
+}
+
+.custom-form-title textarea::placeholder{
     color: #101828;
     font-size: 24px;
     font-family: Inter;
     font-weight: 600;
-    word-wrap: break-word /* Replace 'your-font-family-here' with your desired font family, e.g., 'Arial, sans-serif' */
-  }
-
-.custom-placeholder{
-    resize: none;
-}
-
+    line-height: normal;
+  } 
