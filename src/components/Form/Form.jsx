@@ -6,6 +6,7 @@ import {
   Input,
   Popover,
   Button,
+  Divider,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -13,6 +14,7 @@ import DropBox from "./DropBox/DropBox";
 import { FormControl, useFormControlContext } from "@mui/base/FormControl";
 import clsx from "clsx";
 import TextField from "@mui/material/TextField";
+import "./Form.css";
 
 function Form() {
   const [questions, setQuestions] = useState([]);
@@ -123,18 +125,11 @@ function Form() {
 
   return (
     <div className='px-4'>
-      <TextField
-        id='outlined-basic'
-        placeholder='Outlined'
-        variant='outlined'
-        value={titleValue}
-        onChange={(event) => setTitleValue(event.target.value)}
-      />
       {questions.map((question, index) => (
         <div key={question.id}>
           <Box className='flex justify-between pt-[32px]'>
             <Tooltip title='Add' placement='left-start'>
-              #Question{index + 1}
+              #{index + 1}Question
             </Tooltip>
             <div>
               <Tooltip title='Delete' placement='right-start'>
@@ -165,18 +160,13 @@ function Form() {
               </Popover>
             </div>
           </Box>
-          <FormControl required>
-            <Input
-              placeholder='Short answer'
-              slotProps={{
-                input: {
-                  className: clsx(
-                    "w-full text-sm font-normal font-sans leading-normal text-slate-900 bg-white border border-solid border-slate-200 px-3 py-2 rounded-lg hover:bg-slate-100 hover:border-slate-400 focus:outline-0 focus:shadow-outline-purple"
-                  ),
-                },
-              }}
-              value={a_preview}
-              onChange={(event) => setA_preview(event.target.value)}
+          <FormControl required className='pt-6'>
+            <Label>Question title</Label>
+            <TextField
+              id='outlined-multiline-flexible'
+              multiline
+              maxRows={4}
+              className='w-full'
             />
             <HelperText />
           </FormControl>
