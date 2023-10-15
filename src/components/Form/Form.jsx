@@ -167,7 +167,7 @@ function Form() {
               </Popover>
             </div>
           </Box>
-          <FormControl required className='pt-6'>
+          <FormControl required className='pt-6 '>
             <Label className='text-ryzhBlack custom-QuestionTitle'>
               Question title
             </Label>
@@ -175,6 +175,7 @@ function Form() {
               id='outlined-multiline-flexible'
               multiline
               maxRows={4}
+              InputProps={{ sx: { borderRadius: 2 } }}
               className='w-full'
             />
             <HelperText />

@@ -10,6 +10,7 @@ import TextType from "./TextType/TextType";
 import RadioType from "./RadioType/RadioType";
 import CheckboxType from "./CheckBoxType/CheckBoxType";
 import "./DropBox.css";
+
 function DropBox() {
   const [selectedOption, setSelectedOption] = useState("option1");
 
@@ -23,25 +24,31 @@ function DropBox() {
       <Select
         value={selectedOption}
         onChange={handleOptionChange}
-        className='w-full Select-menu-outer'
+        className='w-full customSelect h-11'
       >
         <MenuItem value='option1'>
-          <ListItemIcon>
-            <img src={list} alt='list' />
-          </ListItemIcon>
-          Text
+          <div className='flex flex-row gap-3'>
+            <div className='w-fit flex align-middle'>
+              <img src={list} alt='list' />
+            </div>
+            <span>Text</span>
+          </div>
         </MenuItem>
         <MenuItem value='option2'>
-          <ListItemIcon>
-            <img src={oneA} alt='one' />
-          </ListItemIcon>
-          One from the list
+          <div className='flex flex-row gap-3'>
+            <div className='w-fit flex align-middle'>
+              <img src={oneA} alt='list' />
+            </div>
+            <span>One from the list</span>
+          </div>
         </MenuItem>
         <MenuItem value='option3'>
-          <ListItemIcon>
-            <img src={severalA} alt='some' />
-          </ListItemIcon>
-          Several from the list
+          <div className='flex flex-row gap-3'>
+            <div className='w-fit flex align-middle'>
+              <img src={severalA} alt='list' />
+            </div>
+            <span>Several from the list</span>
+          </div>
         </MenuItem>
       </Select>
       {selectedOption === "option1" && <TextType />}

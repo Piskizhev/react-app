@@ -1,3 +1,4 @@
-.Select-menu-outer{
-    top: 100%;
-    bottom: auto}
+.customSelect{
+border-radius: 8px !important;
+
+}

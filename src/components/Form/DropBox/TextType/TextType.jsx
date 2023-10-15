@@ -4,6 +4,7 @@ import { FormControl, useFormControlContext } from "@mui/base/FormControl";
 import { Input } from "@mui/base/Input";
 import clsx from "clsx";
 import "./TextType.css";
+import { FormLabel } from "@mui/material";
 
 export default function TextType() {
   return (
