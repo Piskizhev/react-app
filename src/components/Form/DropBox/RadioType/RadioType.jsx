@@ -1,27 +1,20 @@
-import React, { useState, useRef } from "react";
 import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import TextField from "@mui/material/TextField";
-import IconButton from "@mui/material/IconButton";
-import ClearIcon from "@mui/icons-material/Clear";
-import { Typography } from "@mui/material";
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import { Box } from "@mui/material";
+import React, { useState } from "react";
 
 function RadioType() {
-  const [radioOptions, setRadioOptions] = useState(["Radio Option 1"]);
-  const [textValue, setTextValue] = useState("");
-
-  const inputRef = useRef(null);
-
-  const handleTextChange = (event) => {
-    setTextValue(event.target.value);
+  const [radioOptions, setRadioOptions] = useState(["Variant 1"]);
+  const [radioInputValue, setRadioInputValue] = useState("");
+  const handleRadioInputChange = (event) => {
+    radioInputValue(event.target.value);
   };
-
   const handleBlur = () => {
-    if (textValue.trim() !== "" && !radioOptions.includes(textValue)) {
-      setRadioOptions([...radioOptions, textValue]);
-      setTextValue("");
+    if (
+      radioInputValue.trim() !== "" &&
+      !radioOptions.includes(radioInputValue)
+    ) {
+      setRadioOptions([...radioOptions, radioInputValue]);
+      setRadioInputValue("");
     }
   };
 
@@ -32,48 +25,19 @@ function RadioType() {
   };
 
   return (
-    <div>
-      <RadioGroup className='py-4 w-max	'>
-        {radioOptions.map((option, index) => (
-          <div key={index} className='flex space-between'>
-            {/* <FormControlLabel
-              value={option}
-              control={<Radio />}
-              // label={option}
-              className='w-full'
-            > */}
-            <RadioButtonUncheckedIcon className='text-red-600' />
-            <Typography>{option}</Typography>
-            {/* </FormControlLabel> */}
-            {radioOptions.length > 1 && (
-              <IconButton
-                onClick={() => handleDeleteOption(index)}
-                color='secondary'
-                size='small'
-              >
-                <ClearIcon />
-              </IconButton>
-            )}
+    <Box className='flex'>
+      {radioOptions.map((option, index) => (
+        <div className='w-full flex-row'>
+          <div className='radioIcon flex-1'>
+            <Radio disabled cheked={false} />
           </div>
-        ))}
-
-        {/* Display the "Add New Option" */}
-        <FormControlLabel
-          value='add-new-option'
-          control={<Radio disabled />}
-          label={
-            <TextField
-              placeholder='Add New Option'
-              value={textValue}
-              onChange={handleTextChange}
-              onBlur={handleBlur}
-              inputRef={inputRef}
-              fullWidth
-            />
-          }
-        />
-      </RadioGroup>
-    </div>
+          <div className='contents'>
+            <div className='flex-1'>eto 1</div>
+            <div className='radio-text-value flex-1'>eto2 crest</div>
+          </div>
+        </div>
+      ))}
+    </Box>
   );
 }
 
