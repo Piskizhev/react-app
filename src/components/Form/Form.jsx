@@ -6,7 +6,6 @@ import {
   Box,
   Input,
   Popover,
-  Button,
   Divider,
   Typography,
 } from "@mui/material";
@@ -17,11 +16,21 @@ import DropBox from "./DropBox/DropBox";
 import { FormControl, useFormControlContext } from "@mui/base/FormControl";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import Button from "@mui/joy/Button";
+import DividerModal from "@mui/joy/Divider";
+import DialogTitle from "@mui/joy/DialogTitle";
+import DialogContent from "@mui/joy/DialogContent";
+import DialogActions from "@mui/joy/DialogActions";
+import Modal from "@mui/joy/Modal";
+import ModalDialog from "@mui/joy/ModalDialog";
+// import DeleteForever from "@mui/icons-material/DeleteForever";
+import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import "./Form.css";
+// import ConfirmDelete from "./DropBox/ConfirmDelete/ConfirmDelete";
 
 function Form() {
   const [questions, setQuestions] = useState([]);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = React.useState(false);
 
   const handleAddQuestion = () => {
     setQuestions((prevQuestions) => [
@@ -30,19 +39,10 @@ function Form() {
     ]);
   };
 
-  const handleDeleteClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleDeleteConfirm = (id) => {
     // Remove the question with the given ID
     const updatedQuestions = questions.filter((q) => q.id !== id);
     setQuestions(updatedQuestions);
-    setAnchorEl(null);
-  };
-
-  const handleDeleteCancel = () => {
-    setAnchorEl(null);
   };
 
   const generateUniqueId = () => {
@@ -129,32 +129,51 @@ function Form() {
               #{index + 1} Question
             </Tooltip>
             <div>
-              <Tooltip title='Delete' placement='right-start'>
-                <IconButton onClick={handleDeleteClick}>
-                  <img src={deleteIcon} alt='delete' />
-                </IconButton>
-              </Tooltip>
-              <Popover
-                open={Boolean(anchorEl)}
-                anchorEl={anchorEl}
-                onClose={handleDeleteCancel}
-                anchorReference='anchorPosition'
-                anchorPosition={{
-                  top: window.innerHeight - 32, // Adjust as needed
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "center",
-                }}
-              >
-                <Box p={2}>
-                  <span>Are you sure you want to delete this question?</span>
-                  <Button onClick={() => handleDeleteConfirm(question.id)}>
-                    Confirm
-                  </Button>
-                  <Button onClick={handleDeleteCancel}>Cancel</Button>
-                </Box>
-              </Popover>
+              <div className='ConfirmDelete'>
+                <React.Fragment>
+                  <Button
+                    variant='outlined'
+                    color='danger'
+                    endDecorator={
+                      <IconButton>
+                        <img src={deleteIcon} alt='delete' />
+                      </IconButton>
+                    }
+                    onClick={() => setOpen(true)}
+                  ></Button>
+                  <Modal open={open} onClose={() => setOpen(false)}>
+                    <ModalDialog variant='outlined' role='alertdialog'>
+                      <DialogTitle>
+                        <WarningRoundedIcon />
+                        Confirmation
+                      </DialogTitle>
+                      <DividerModal />
+                      <DialogContent>
+                        Are you sure you want to discard all of your notes?
+                      </DialogContent>
+                      <DialogActions>
+                        <Button
+                          variant='solid'
+                          color='danger'
+                          onClick={() => {
+                            setOpen(false);
+                            handleDeleteConfirm(question.id);
+                          }}
+                        >
+                          Discard notes
+                        </Button>
+                        <Button
+                          variant='plain'
+                          color='neutral'
+                          onClick={() => setOpen(false)}
+                        >
+                          Cancel
+                        </Button>
+                      </DialogActions>
+                    </ModalDialog>
+                  </Modal>
+                </React.Fragment>
+              </div>
             </div>
           </Box>
           <FormControl required className='pt-6 '>
