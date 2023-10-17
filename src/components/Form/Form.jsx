@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import deleteIcon from "../../img/bin.svg";
 import { Tooltip, IconButton, Box, Divider, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
