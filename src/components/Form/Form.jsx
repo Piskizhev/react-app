@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from "react";
 import deleteIcon from "../../img/bin.svg";
-import {
-  Tooltip,
-  IconButton,
-  Box,
-  Input,
-  Popover,
-  Divider,
-  Typography,
-} from "@mui/material";
+import { Tooltip, IconButton, Box, Divider, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import DropBox from "./DropBox/DropBox";
 import { FormControl, useFormControlContext } from "@mui/base/FormControl";
@@ -23,10 +14,8 @@ import DialogContent from "@mui/joy/DialogContent";
 import DialogActions from "@mui/joy/DialogActions";
 import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
-// import DeleteForever from "@mui/icons-material/DeleteForever";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import "./Form.css";
-// import ConfirmDelete from "./DropBox/ConfirmDelete/ConfirmDelete";
 
 function Form() {
   const [questions, setQuestions] = useState([]);
