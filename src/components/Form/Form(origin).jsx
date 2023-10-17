@@ -15,9 +15,6 @@ import DialogActions from "@mui/joy/DialogActions";
 import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
-
-import CustomDeleteButton from "./CustomDeleteButton";
-
 import "./Form.css";
 
 function Form() {
@@ -122,7 +119,6 @@ function Form() {
             </Tooltip>
             <div>
               <div className='ConfirmDelete'>
-                <CustomDeleteButton />
                 <React.Fragment>
                   <Button
                     variant='outlined'
