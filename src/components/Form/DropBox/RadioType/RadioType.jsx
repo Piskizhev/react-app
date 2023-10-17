@@ -1,27 +1,18 @@
 import { Box } from "@mui/material";
-import React, { useState, useRef } from "react";
-import Textarea from "@mui/joy/Textarea";
+import React, { useState } from "react";
+import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import "./RadioType.css";
 import FormLabel from "@mui/joy/FormLabel";
+import Sheet from "@mui/joy/Sheet";
 
 import cross from "../icons/cross.svg";
 import radioButton from "../icons/radio-button.svg";
 
 function RadioType() {
-  const inputRef = useRef(null);
-  const [radioOptions, setRadioOptions] = useState(["Variant1"]);
-  const [radioInputValue, setRadioInputValue] = useState("");
-  const handleRadioInputChange = (event) => {
-    setRadioInputValue(event.target.value);
-  };
-  const handleBlur = () => {
-    if (
-      radioInputValue.trim() !== "" &&
-      !radioOptions.includes(radioInputValue)
-    ) {
-      setRadioOptions([...radioOptions, radioInputValue]);
-      setRadioInputValue("");
-    }
+  const [radioOptions, setRadioOptions] = useState(["Variant 1"]);
+
+  const handleAddNewVariant = () => {
+    setRadioOptions([...radioOptions, `Variant ${radioOptions.length + 1}`]);
   };
 
   const handleDeleteOption = (index) => {
@@ -32,9 +23,9 @@ function RadioType() {
 
   return (
     <Box className='w-full pt-6'>
-      <FormLabel className=''>Answer preview:</FormLabel>
+      <FormLabel>Answer preview:</FormLabel>
       {radioOptions.map((option, index) => (
-        <div key={index} className='w-full py-4 flex justify-between gap-3 '>
+        <div key={index} className='w-full pt-4 flex justify-between gap-3 '>
           <div className='flex items-center'>
             <div className='radioIcon pb-2'>
               <img src={radioButton} alt='radio ' />
@@ -42,15 +33,14 @@ function RadioType() {
           </div>
 
           <div className='radio-text-value flex flex-1 justify-between border-b border-ryzhGray-light pb-2'>
-            <div className='flex flex-1  justify-items-start'>
-              <Textarea
+            <div className='flex flex-1 justify-items-start custom-radio-input'>
+              <TextareaAutosize
                 placeholder={option}
-                variant='plain'
-                className='w-full '
+                className='w-full custom-resize'
               />
             </div>
             {radioOptions.length > 1 && (
-              <div className='flex  align-middle'>
+              <div className='flex align-middle'>
                 <img
                   src={cross}
                   alt='delete'
@@ -61,29 +51,18 @@ function RadioType() {
           </div>
         </div>
       ))}
-      <div className='w-full py-4 flex justify-between gap-3 '>
+      <div className='w-full py-4 flex gap-3 ' onClick={handleAddNewVariant}>
         <div className='flex items-center'>
-          <div className='radioIcon pb-2'>
+          <div className='radioIcon  items-center'>
             <img src={radioButton} alt='radio' />
           </div>
         </div>
 
-        <div
-          className='radio-text-value flex flex-1 justify-between focus::border-ryzhGray-light pb-2'
-          value='add-new-option'
-        >
-          <div className='flex flex-1  justify-items-start'>
-            <Textarea
-              placeholder='Add New Option'
-              value={radioInputValue}
-              onChange={handleRadioInputChange}
-              onBlur={handleBlur}
-              inputRef={inputRef}
-              className='w-full '
-              variant='plain'
-            />
-          </div>
-        </div>
+        <Sheet className='w-full custom-radio-input '>
+          <span className=' text-ryzhGray-strong font-semibold '>
+            Add new variant
+          </span>
+        </Sheet>
       </div>
     </Box>
   );

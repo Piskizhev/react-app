@@ -1,14 +1,17 @@
-.radioIcon .span{
-    padding: 0 !important;
-}
 
 .custom-cross {
     text-align: center;
 }
 
-.custom-radio-button{
-    width: 100%;
-    height: 20px,;
-    border-radius: 32px;
-    border: 1px #D0D5DD solid;
+.custom-check-input {
+   background-color: transparent !important;
+   
+}
+
+.custom-check-input textarea::placeholder{
+    color:#101828;
+}
+
+.custom-resize{
+    resize: none;
 }

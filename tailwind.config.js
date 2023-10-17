@@ -8,6 +8,7 @@ module.exports = {
       ryzhGray: {
         DEFAULT: "#98A2B3",
         light: "#D0D5DD",
+        strong: "#667085",
       },
     },
   },
