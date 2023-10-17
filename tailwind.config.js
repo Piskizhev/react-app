@@ -5,7 +5,10 @@ module.exports = {
     colors: {
       ryzhBlue: "#2970FF",
       ryzhBlack: "#101828",
-      ryzhGray: "#98A2B3",
+      ryzhGray: {
+        DEFAULT: "#98A2B3",
+        light: "#D0D5DD",
+      },
     },
   },
   plugins: [],

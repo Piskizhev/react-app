@@ -1,12 +1,18 @@
-import Radio from "@mui/material/Radio";
 import { Box } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import Textarea from "@mui/joy/Textarea";
+import "./RadioType.css";
+import FormLabel from "@mui/joy/FormLabel";
+
+import cross from "../icons/cross.svg";
+import radioButton from "../icons/radio-button.svg";
 
 function RadioType() {
-  const [radioOptions, setRadioOptions] = useState(["Variant 1"]);
+  const inputRef = useRef(null);
+  const [radioOptions, setRadioOptions] = useState(["Variant1"]);
   const [radioInputValue, setRadioInputValue] = useState("");
   const handleRadioInputChange = (event) => {
-    radioInputValue(event.target.value);
+    setRadioInputValue(event.target.value);
   };
   const handleBlur = () => {
     if (
@@ -25,18 +31,60 @@ function RadioType() {
   };
 
   return (
-    <Box className='flex'>
+    <Box className='w-full pt-6'>
+      <FormLabel className=''>Answer preview:</FormLabel>
       {radioOptions.map((option, index) => (
-        <div className='w-full flex-row'>
-          <div className='radioIcon flex-1'>
-            <Radio disabled cheked={false} />
+        <div key={index} className='w-full py-4 flex justify-between gap-3 '>
+          <div className='flex items-center'>
+            <div className='radioIcon pb-2'>
+              <img src={radioButton} alt='radio ' />
+            </div>
           </div>
-          <div className='contents'>
-            <div className='flex-1'>eto 1</div>
-            <div className='radio-text-value flex-1'>eto2 crest</div>
+
+          <div className='radio-text-value flex flex-1 justify-between border-b border-ryzhGray-light pb-2'>
+            <div className='flex flex-1  justify-items-start'>
+              <Textarea
+                placeholder={option}
+                variant='plain'
+                className='w-full '
+              />
+            </div>
+            {radioOptions.length > 1 && (
+              <div className='flex  align-middle'>
+                <img
+                  src={cross}
+                  alt='delete'
+                  onClick={() => handleDeleteOption(index)}
+                />
+              </div>
+            )}
           </div>
         </div>
       ))}
+      <div className='w-full py-4 flex justify-between gap-3 '>
+        <div className='flex items-center'>
+          <div className='radioIcon pb-2'>
+            <img src={radioButton} alt='radio' />
+          </div>
+        </div>
+
+        <div
+          className='radio-text-value flex flex-1 justify-between focus::border-ryzhGray-light pb-2'
+          value='add-new-option'
+        >
+          <div className='flex flex-1  justify-items-start'>
+            <Textarea
+              placeholder='Add New Option'
+              value={radioInputValue}
+              onChange={handleRadioInputChange}
+              onBlur={handleBlur}
+              inputRef={inputRef}
+              className='w-full '
+              variant='plain'
+            />
+          </div>
+        </div>
+      </div>
     </Box>
   );
 }

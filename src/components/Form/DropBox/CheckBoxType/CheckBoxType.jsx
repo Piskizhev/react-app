@@ -1,69 +1,69 @@
+import { Box, Button } from "@mui/material";
 import React, { useState, useRef } from "react";
-import Checkbox from "@mui/material/Checkbox";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import TextField from "@mui/material/TextField";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+import Textarea from "@mui/joy/Textarea";
+import "./CheckBoxType.css";
+import FormLabel from "@mui/joy/FormLabel";
 
-function CheckBoxType() {
-  const [checkboxOptions, setCheckboxOptions] = useState(["Checkbox Option 1"]);
-  const [textValue, setTextValue] = useState("");
-  const [checkBoxValue, setCheckBoxValue] = useState(null);
+import cross from "../icons/cross.svg";
+import checkButton from "../icons/check-button.svg";
 
-  const inputRef = useRef(null);
+function CheckType() {
+  const [checkOptions, setCheckOptions] = useState(["Variant1"]);
 
-  const handleTextChange = (event) => {
-    setTextValue(event.target.value);
-  };
-
-  const handleBlur = () => {
-    if (textValue.trim() !== "" && !checkboxOptions.includes(textValue)) {
-      setCheckboxOptions([...checkboxOptions, textValue]);
-      setTextValue("");
-    }
+  const handleAddNewVariant = () => {
+    setCheckOptions([...checkOptions, `Variant${checkOptions.length + 1}`]);
   };
 
   const handleDeleteOption = (index) => {
-    const updatedCheckboxOptions = [...checkboxOptions];
-    updatedCheckboxOptions.splice(index, 1);
-    setCheckboxOptions(updatedCheckboxOptions);
+    const updatedCheckOptions = [...checkOptions];
+    updatedCheckOptions.splice(index, 1);
+    setCheckOptions(updatedCheckOptions);
   };
 
   return (
-    <div>
-      <RadioGroup>
-        {checkboxOptions.map((option, index) => (
-          <div key={index} className='flex space-between'>
-            <FormControlLabel control={<Checkbox />} label={option} />
-            {checkboxOptions.length > 1 && (
-              <IconButton
-                onClick={() => handleDeleteOption(index)}
-                color='secondary'
-                size='small'
-              >
-                <DeleteIcon />
-              </IconButton>
+    <Box className='w-full pt-6'>
+      <FormLabel className=''>Answer preview:</FormLabel>
+      {checkOptions.map((option, index) => (
+        <div key={index} className='w-full py-4 flex justify-between gap-3 '>
+          <div className='flex items-center'>
+            <div className='checkIcon pb-2'>
+              <img src={checkButton} alt='check ' />
+            </div>
+          </div>
+
+          <div className='check-text-value flex flex-1 justify-between border-b border-ryzhGray-light pb-2'>
+            <div className='flex flex-1 justify-items-start'>
+              <Textarea
+                placeholder={option}
+                variant='plain'
+                className='w-full '
+              />
+            </div>
+            {checkOptions.length > 1 && (
+              <div className='flex align-middle'>
+                <img
+                  src={cross}
+                  alt='delete'
+                  onClick={() => handleDeleteOption(index)}
+                />
+              </div>
             )}
           </div>
-        ))}
+        </div>
+      ))}
+      <div className='w-full py-4 flex justify-between gap-3 '>
+        <div className='flex items-center'>
+          <div className='checkIcon pb-2'>
+            <img src={checkButton} alt='check' />
+          </div>
+        </div>
 
-        <FormControlLabel
-          control={<Checkbox disabled />}
-          label={
-            <TextField
-              label='Add New Option'
-              value={textValue}
-              onChange={handleTextChange}
-              onBlur={handleBlur}
-              inputRef={inputRef}
-              fullWidth
-            />
-          }
-        />
-      </RadioGroup>
-    </div>
+        <Button variant='outlined' onClick={handleAddNewVariant}>
+          Add Variant
+        </Button>
+      </div>
+    </Box>
   );
 }
 
-export default CheckBoxType;
+export default CheckType;
