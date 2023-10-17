@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import "./Header.css";
 import logo from "../../img/bear.png";

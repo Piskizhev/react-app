@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import list from "./icons/list.svg";
 import oneA from "./icons/oneA.svg";
 import severalA from "./icons/severalA.svg";
