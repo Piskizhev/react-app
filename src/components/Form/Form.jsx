@@ -14,7 +14,6 @@ import DialogContent from "@mui/joy/DialogContent";
 import DialogActions from "@mui/joy/DialogActions";
 import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
-import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import "./Form.css";
 
 function Form() {
@@ -106,99 +105,107 @@ function Form() {
   };
 
   return (
-    <div className='px-4'>
-      {questions.map((question, index) => (
-        <div key={question.id}>
-          <Box className='flex justify-between align-middle	 pt-6'>
-            <Tooltip
-              title='Add'
-              placement='left-start'
-              className='flex align-middle text-ryzhGray'
-            >
-              #{index + 1} Question
-            </Tooltip>
-            <div>
-              <div className='ConfirmDelete'>
-                <React.Fragment>
-                  <Button
-                    variant='outlined'
-                    color='danger'
-                    endDecorator={
+    <div>
+      <div className='px-4'>
+        {questions.map((question, index) => (
+          <div key={question.id}>
+            <Box className='flex justify-between align-middle	 pt-6'>
+              <Tooltip
+                title='Add'
+                placement='left-start'
+                className='flex align-middle text-ryzhGray'
+              >
+                #{index + 1} Question
+              </Tooltip>
+              <div>
+                <div className='ConfirmDelete'>
+                  <React.Fragment>
+                    <div variant='outlined' onClick={() => setOpen(true)}>
                       <IconButton>
                         <img src={deleteIcon} alt='delete' />
                       </IconButton>
-                    }
-                    onClick={() => setOpen(true)}
-                  ></Button>
-                  <Modal open={open} onClose={() => setOpen(false)}>
-                    <ModalDialog variant='outlined' role='alertdialog'>
-                      <DialogTitle>
-                        <WarningRoundedIcon />
-                        Confirmation
-                      </DialogTitle>
-                      <DividerModal />
-                      <DialogContent>
-                        Are you sure you want to discard all of your notes?
-                      </DialogContent>
-                      <DialogActions>
-                        <Button
-                          variant='solid'
-                          color='danger'
-                          onClick={() => {
-                            setOpen(false);
-                            handleDeleteConfirm(question.id);
-                          }}
-                        >
-                          Discard notes
-                        </Button>
-                        <Button
-                          variant='plain'
-                          color='neutral'
-                          onClick={() => setOpen(false)}
-                        >
-                          Cancel
-                        </Button>
-                      </DialogActions>
-                    </ModalDialog>
-                  </Modal>
-                </React.Fragment>
+                    </div>
+                    <Modal open={open} onClose={() => setOpen(false)}>
+                      <ModalDialog variant='outlined' role='alertdialog'>
+                        <DialogTitle>
+                          <span className='modal-title'>
+                            Are you sure you want to delete this question?
+                          </span>
+                        </DialogTitle>
+                        <DividerModal />
+                        <DialogContent>
+                          <span className='modal-text'>
+                            You won't be able to restore this data anymore.
+                          </span>
+                        </DialogContent>
+                        <DialogActions className='custom-modal-buttons flex   justify-stretch '>
+                          <Button
+                            className='custom-modal-delete flex-1'
+                            variant='solid'
+                            onClick={() => {
+                              setOpen(false);
+                              handleDeleteConfirm(question.id);
+                            }}
+                          >
+                            Discard notes
+                          </Button>
+                          <Button
+                            className='custom-modal-cancel flex-1'
+                            variant='outlined'
+                            color='neutral'
+                            onClick={() => setOpen(false)}
+                          >
+                            Cancel
+                          </Button>
+                        </DialogActions>
+                      </ModalDialog>
+                    </Modal>
+                  </React.Fragment>
+                </div>
               </div>
-            </div>
-          </Box>
-          <FormControl required className='pt-6 '>
-            <Label className='text-ryzhBlack custom-QuestionTitle'>
-              Question title
-            </Label>
-            <TextField
-              id='outlined-multiline-flexible'
-              multiline
-              maxRows={4}
-              InputProps={{ sx: { borderRadius: 2 } }}
-              className='w-full'
-            />
-            <HelperText />
-          </FormControl>
-          <DropBox />
-          {questions.length !== 0 && <Divider className='pt-8' />}
-        </div>
-      ))}
+            </Box>
+            <FormControl required className='pt-6 '>
+              <Label className='text-ryzhBlack custom-QuestionTitle'>
+                Question title
+              </Label>
+              <TextField
+                id='outlined-multiline-flexible'
+                multiline
+                maxRows={4}
+                InputProps={{ sx: { borderRadius: 2 } }}
+                className='w-full'
+              />
+              <HelperText />
+            </FormControl>
+            <DropBox />
+            {questions.length !== 0 && <Divider className='pt-8' />}
+          </div>
+        ))}
 
-      <Box
-        className='flex justify-between pt-4 px-4 pb-[88px] '
-        onClick={handleAddQuestion}
-      >
-        <Tooltip
-          title='Add new question'
-          placement='left-start'
-          className='flex gap-3'
+        <Box
+          className='flex justify-between pt-4 px-4 pb-[88px] '
+          onClick={handleAddQuestion}
         >
-          <AddIcon sx={{ fontSize: 20 }} className='text-ryzhBlue ' />
+          <Tooltip
+            title='Add new question'
+            placement='left-start'
+            className='flex gap-3'
+          >
+            <AddIcon sx={{ fontSize: 20 }} className='text-ryzhBlue ' />
 
-          <Typography className='text-ryzhBlue custom-AddNewStyle'>
-            Add new question
-          </Typography>
-        </Tooltip>
-      </Box>
+            <Typography className='text-ryzhBlue custom-AddNewStyle'>
+              Add new question
+            </Typography>
+          </Tooltip>
+        </Box>
+      </div>
+      <div className='flex items-center justify-center px-4 pb-4'>
+        {questions.length !== 0 && (
+          <Button className='w-full custom-save-button'>
+            <span className='save-text'>Save</span>
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

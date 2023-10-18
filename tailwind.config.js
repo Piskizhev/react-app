@@ -10,6 +10,7 @@ module.exports = {
         light: "#D0D5DD",
         strong: "#667085",
       },
+      ryzhRed: "#F04438",
     },
   },
   plugins: [],
