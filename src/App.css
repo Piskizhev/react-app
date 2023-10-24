@@ -8,3 +8,8 @@
   box-sizing: border-box;
   
 }
+
+body{
+background: var(--tg-theme-bg-color) ;
+text_color : var(--tg-theme-text-color);
+}
