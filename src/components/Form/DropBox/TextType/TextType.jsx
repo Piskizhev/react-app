@@ -14,6 +14,7 @@ export default function TextType() {
         disabled
         variant='outlined'
         className='custom-placeholder-text'
+        type="text"
       />
     </Box>
   );
