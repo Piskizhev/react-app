@@ -10,6 +10,6 @@
 }
 
 body{
-background: var(--tg-theme-bg-color) ;
+bg-color: var(--tg-theme-bg-color) ;
 text_color : var(--tg-theme-text-color);
 }
