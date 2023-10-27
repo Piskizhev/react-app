@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
@@ -9,26 +9,67 @@ import TextType from "./TextType/TextType";
 import RadioType from "./RadioType/RadioType";
 import CheckboxType from "./CheckBoxType/CheckBoxType";
 import "./DropBox.css";
+import TextField from "@mui/material/TextField";
 
-function DropBox({ questionId, updateFormData }) {
+function DropBox({questionId, updateFormData}) {
     const [selectedOption, setSelectedOption] = useState("option1");
-    const [answerData, setAnswerData] = useState({ textAnswer: "" });
+    const [questionTitle, setQuestionTitle] = useState("")
+    const [answerType, setAnswerType] = useState("Text")
 
-    const handleOptionChange = (event) => {
-        setSelectedOption(event.target.value);
-    };
-    const handleAnswerDataChange = (event) => {
-        const newData = { textAnswer: event.target.value };
-        setAnswerData(newData);
+
+    const handleQuestionOnChange = (event) => {
+        setQuestionTitle(event.target.value)
+    }
+
+    const handleSelectedOption = (event) => {
+        setSelectedOption(event.target.value)
+    }
+    const handleAnswerType = () => {
+        return selectedOption === "option1"
+            ? setAnswerType("Text")
+            : selectedOption === "option2"
+                ? setAnswerType("RadioType")
+                : setAnswerType("CheckBox")
+    }
+
+
+    const updateAnswerType = () => {
+        const newData = {answerType: answerType};
         updateFormData(questionId, newData); // Вызов функции для обновления данных в formData
-    };
+    }
+    const updateBodyObj = () => {
+        const newData = {questionTitle: questionTitle};
+        updateFormData(questionId, newData); // Вызов функции для обновления данных в formData
+    }
+    useEffect(() => {
+        updateBodyObj()
+        updateAnswerType()
+        handleAnswerType()
+    }, [questionTitle, answerType, selectedOption]);
+
+    // const handleAnswerDataChange = () => {
+    //     const newData = { textAnswer: questionTitle };
+    //     setAnswerData(newData);
+    //     updateFormData(questionId, newData); // Вызов функции для обновления данных в formData
+    //     console.log(bodyObj)
+    // };
 
     return (
         <div className='pt-6'>
+            <TextField
+                id='outlined-multiline-flexible'
+                multiline
+                maxRows={4}
+                InputProps={{sx: {borderRadius: 2}}}
+                className='w-full'
+                value={questionTitle}
+                placeholder={"Question title"}
+                onChange={handleQuestionOnChange}
+            />
             <Typography variant='subtitle1'>Answer type:</Typography>
             <Select
                 value={selectedOption}
-                onChange={handleOptionChange}
+                onChange={handleSelectedOption}
                 className='w-full customSelect h-11'
             >
                 <MenuItem value='option1'>
@@ -56,13 +97,17 @@ function DropBox({ questionId, updateFormData }) {
                     </div>
                 </MenuItem>
             </Select>
-            {selectedOption === "option1" && (
-                <input
-                    type="text"
-                    value={answerData.textAnswer}
-                    onChange={handleAnswerDataChange}
-                />
-            )}
+            {selectedOption === "option1" && <TextField
+                style={
+                    {
+                        marginTop: "10px",
+                        width: "100%"
+                    }}
+                label="Answer preview"
+                id="outlined-size-small"
+                disabled
+                size="small"
+            />}
             {selectedOption === "option2" && <RadioType/>}
             {selectedOption === "option3" && <CheckboxType/>}
         </div>

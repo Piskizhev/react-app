@@ -26,24 +26,23 @@ function Form() {
     const handleAddQuestion = () => {
         const newQuestion = {id: v1(), data: {}};
         setQuestions((prevQuestions) => [...prevQuestions, newQuestion]);
-        setFormData((prevFormData) => ({...prevFormData, [newQuestion.id]: newQuestion.data}));
+        setFormData((prevFormData) => ({...prevFormData, [newQuestion.id]: newQuestion}));
     };
 
     const updateFormData = (questionId, newData) => {
         setFormData((prevFormData) => ({...prevFormData, [questionId]: {...prevFormData[questionId], ...newData}}));
     };
-    console.log(questions)
 
-    const handleQuestionOnChange = (event, questionId) => {
-        setQuestionTitle(event.target.value)
-        setFormData((el) => ({...el, [questionId]: {...el[questionId], questionTitle}}));
-    }
 
     const handleDeleteConfirm = (questionId) => {
-        console.log(questionId)
-        // setQuestions([...questions, questions.filter((el) => el.id !== questionId)])
-        delete formData[questionId]
+        const updatedQuestions = questions.filter((el) => el.id !== questionId);
+        const updatedFormData = {...formData};
+        delete updatedFormData[questionId];
+
+        setQuestions(updatedQuestions);
+        setFormData(updatedFormData);
     };
+
 
     const Label = React.forwardRef(
         ({className: classNameProp, children}, ref) => {
@@ -127,12 +126,11 @@ function Form() {
                 console.error('Error:', error);
             });
     };
+    console.log(formData)
 
     HelperText.propTypes = {
         className: PropTypes.string,
     };
-
-
 
     return (
         <div>
@@ -194,21 +192,7 @@ function Form() {
                                 </div>
                             </div>
                         </Box>
-                        <FormControl required className='pt-6 '>
-                            <Label className='text-ryzhBlack custom-QuestionTitle'>
-                                Question title
-                            </Label>
-                            <TextField
-                                id='outlined-multiline-flexible'
-                                multiline
-                                maxRows={4}
-                                InputProps={{sx: {borderRadius: 2}}}
-                                className='w-full'
-                                value={questionTitle}
-                                onChange={() => handleQuestionOnChange(questionTitle, question.id)}
-                            />
-                            <HelperText/>
-                        </FormControl>
+                        <HelperText/>
                         <DropBox updateFormData={updateFormData} questionId={question.id}/>
                         {questions.length !== 0 && <Divider className='pt-8'/>}
                     </div>
